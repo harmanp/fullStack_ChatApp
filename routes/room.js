@@ -20,13 +20,6 @@ router.get('/:id', function (req, res, next) {
   })
 })
 
-router.get('/:room_name', function (req, res, next) {
-  Room.find({room_name: req.params.room_name}, function (err, post) {
-    if (err) return next(err)
-    res.json(post)
-  })
-})
-
 /* SAVE ROOM */
 router.post('/', function (req, res, next) {
   Room.create(req.body, function (err, post) {

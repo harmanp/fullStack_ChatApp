@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var room = require('./routes/room');
 var chat = require('./routes/chat');
 var events = require('./routes/events');
+var roomhistory = require('./routes/roomhistory');
 //var messages = require('./routes/messages');
 
 var app = express();
@@ -28,6 +29,7 @@ app.use('/api/room', room);
 app.use('/api/eventslog', events)
 app.use('/api/chat', chat);
 app.use('/api/history', chat);
+app.use('/api/roomhistory', roomhistory);
 // app.use('/api/chat', chat);
 
 // catch 404 and forward to error handler

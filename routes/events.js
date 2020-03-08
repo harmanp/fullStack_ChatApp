@@ -14,22 +14,16 @@ server.listen(4000)
 var io = require('socket.io')(server)
 
 io.on('connection', function (socket) {
-  console.log('User connection')
+  var userConnectEvent = new Events({eventType: 'user-connected', socketID: socket.id, message: 'User Connected'})
+  userConnectEvent.save()
 
   socket.on('disconnect', function () {
-    console.log('User disconnected')
-  })
-  socket.on('join-room', function (data) {
-    console.log(data)
-    var joinEvent = new Events({eventType: 'join-room', userName: data.nickname, socketID: socket.id, room: data.room})
-    joinEvent.save()
-    socket.userName = data.nickname
-    socket.room = data.room
-    io.emit('join-room', { message: data })
+    var userDisconnectEvent = new Events({eventType: 'user-disconnected', socketID: socket.id, message: 'User disconnected'})
+    userDisconnectEvent.save()
   })
   socket.on('new-message', function (data) {
     console.log(data)
-    var newMessageEvent = new Events({eventType: 'new-message', userName: data.nickname, socketID: socket.id, room: data.room})
+    var newMessageEvent = new Events({eventType: data.eventType, userName: data.nickname, socketID: socket.id, room: data.room, message: data.message})
     newMessageEvent.save()
     io.emit('new-message', { message: data })
   })

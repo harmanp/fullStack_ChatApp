@@ -81,18 +81,19 @@ export default {
   },
   methods: {
     logout () {
-      this.socket.emit('save-message', { room: this.chat.room, nickname: this.chat.nickname, message: this.chat.nickname + ' left this room', created_date: new Date() })
+      console.log(this.chat)
+      this.socket.emit('new-message', { room: this.$route.params.id, eventType: 'log-out', nickname: this.$route.params.nickname, message: this.$route.params.nickname + ' Left this room', created_date: new Date() })
       this.$router.push({
         name: 'RoomList'
       })
     },
     onSubmit (evt) {
-      console.log('ASDASDASDASDASD')
       evt.preventDefault()
       this.chat.room = this.$route.params.id
       this.chat.nickname = this.$route.params.nickname
       axios.post(`http://localhost:3000/api/chat`, this.chat)
         .then(response => {
+          response.data['eventType'] = 'new-message'
           this.socket.emit('new-message', response.data)
           this.chat.message = ''
         })

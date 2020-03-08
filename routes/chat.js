@@ -42,19 +42,17 @@ router.get('/:id', function (req, res, next) {
   })
 })
 
-router.get('/find_by/:room_name', function (req, res, next) {
-  Room.findOne({ room_name: req.params.room_name }).populate('chats').exec(function (err, room) {
-    if (err) return next(err)
-    console.log(room.chats)
-    res.json({})
-  })
-})
-
 /* SAVE CHAT */
 router.post('/', function (req, res, next) {
-  Chat.create(req.body, function (err, post) {
+  Chat.create(req.body, function (err, chat) {
     if (err) return next(err)
-    res.json(post)
+    Room.findById(chat.room, function (err, room) {
+      if (err) return next(err)
+
+      room.chats.push(chat)
+      room.save()
+      res.json(chat)
+    })
   })
 })
 

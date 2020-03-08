@@ -6,6 +6,7 @@ let Events = new Schema({
   time: {type: Date, default: Date.now},
   userName: String,
   socketID: String,
+  message: String,
   room: String
 })
 
