@@ -7,27 +7,8 @@
 var express = require('express')
 var app = express()
 var router = express.Router()
-var server = require('http').createServer(app)
-var Events = require('../models/Events.js')
+
 // Socket IO
-server.listen(4000)
-var io = require('socket.io')(server)
-
-io.on('connection', function (socket) {
-  var userConnectEvent = new Events({eventType: 'user-connected', socketID: socket.id, message: 'User Connected'})
-  userConnectEvent.save()
-
-  socket.on('disconnect', function () {
-    var userDisconnectEvent = new Events({eventType: 'user-disconnected', socketID: socket.id, message: 'User disconnected'})
-    userDisconnectEvent.save()
-  })
-  socket.on('new-message', function (data) {
-    console.log(data)
-    var newMessageEvent = new Events({eventType: data.eventType, userName: data.nickname, socketID: socket.id, room: data.room, message: data.message})
-    newMessageEvent.save()
-    io.emit('new-message', { message: data })
-  })
-})
 
 // eslint-disable-next-line no-unused-vars
 // Socket IO

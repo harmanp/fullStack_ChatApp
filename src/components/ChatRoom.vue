@@ -61,11 +61,11 @@ export default {
       errors: [],
       nickname: this.$route.params.nickname,
       chat: {},
-      socket: io('http://localhost:4000')
+      socket: io()
     }
   },
   created () {
-    axios.get(`http://localhost:3000/api/chat/` + this.$route.params.id)
+    axios.get(`https://full-assignment.herokuapp.com/api/chat/` + this.$route.params.id)
       .then(response => {
         this.chats = response.data
       })
@@ -91,7 +91,7 @@ export default {
       evt.preventDefault()
       this.chat.room = this.$route.params.id
       this.chat.nickname = this.$route.params.nickname
-      axios.post(`http://localhost:3000/api/chat`, this.chat)
+      axios.post(`https://full-assignment.herokuapp.com/api/chat`, this.chat)
         .then(response => {
           response.data['eventType'] = 'new-message'
           this.socket.emit('new-message', response.data)

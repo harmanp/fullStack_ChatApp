@@ -31,7 +31,7 @@ export default {
   data () {
     return {
       chat: {},
-      socket: io('http://localhost:4000')
+      socket: io()
     }
   },
   methods: {
@@ -39,7 +39,7 @@ export default {
       evt.preventDefault()
       this.chat.room = this.$route.params.id
       this.chat.message = this.chat.nickname + ' join the room'
-      axios.post(`http://localhost:3000/api/chat`, this.chat)
+      axios.post(`https://full-assignment.herokuapp.com/api/chat`, this.chat)
         .then(response => {
           this.socket.emit('new-message', { room: this.chat.room, eventType: 'join-room', nickname: this.chat.nickname, message: this.chat.message, created_date: new Date() })
           this.$router.push({
