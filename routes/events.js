@@ -7,6 +7,7 @@
 var express = require('express')
 var app = express()
 var router = express.Router()
+var Events = require('../models/Events.js')
 
 // Socket IO
 
