@@ -22,8 +22,8 @@ mongoose.connect('mongodb://admin:admin@cluster0-shard-00-00-hyur7.mongodb.net:2
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'false'}));
-app.use(express.static(path.join(__dirname, 'dist')));
-app.use('/rooms', express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, '/dist')));
+app.use('/rooms', express.static(path.join(__dirname, '/dist')));
 app.use('/api/room', room);
 //app.use('/api/messages', messages)
 app.use('/api/eventslog', events)
@@ -31,7 +31,8 @@ app.use('/api/chat', chat);
 app.use('/api/history', chat);
 app.use('/api/roomhistory', roomhistory);
 // app.use('/api/chat', chat);
-
+var port = process.env.PORT || 3000;
+app.listen(port);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
