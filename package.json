@@ -14,14 +14,14 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.3",
     "bootstrap": "^4.0.0-beta.2",
-    "bootstrap-vue": "^2.0.0-rc.11",
+    "bootstrap-vue": "^2.10.1",
     "express": "^4.16.3",
-    "mongoose": "^5.2.6",
-    "morgan": "^1.9.0",
+    "mongoose": "^5.9.7",
+    "morgan": "^1.10.0",
     "serve-favicon": "^2.5.0",
     "socket.io-client": "^2.1.1",
     "socketio": "^1.0.0",
@@ -84,7 +84,7 @@
     "vue-template-compiler": "^2.5.2",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
-    "webpack-dev-server": "^2.9.1",
+    "webpack-dev-server": "^2.11.5",
     "webpack-merge": "^4.1.0"
   },
   "engines": {
